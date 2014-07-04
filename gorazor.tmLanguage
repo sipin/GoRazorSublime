@@ -327,7 +327,7 @@
 		</dict>
 	</array>
 	<key>scopeName</key>
-	<string>text.html.gohtml</string>
+	<string>source.go.html</string>
 	<key>uuid</key>
 	<string>65e21840-02e5-11e4-9191-0800200c9a66</string>
 </dict>

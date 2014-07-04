@@ -1,6 +1,6 @@
 # [PackageDev] target_format: plist, ext: tmLanguage
 name: GoRazor
-scopeName: text.html.gohtml
+scopeName: source.go.html
 fileTypes: [gohtml]
 uuid: 65e21840-02e5-11e4-9191-0800200c9a66
 
