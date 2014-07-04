@@ -1,0 +1,10 @@
+{
+    "name": "GoRazor",
+    "scopeName": "text.html.gohtml",
+    "fileTypes": ["gohtml"],
+    "patterns": [
+        { "include": "text.html.basic" },
+        { "include": "source.go" }
+    ],
+    "uuid": "65e21840-02e5-11e4-9191-0800200c9a66"
+}
