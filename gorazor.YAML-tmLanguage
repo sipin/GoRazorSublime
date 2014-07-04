@@ -1,0 +1,109 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+name: GoRazor
+scopeName: text.html.gohtml
+fileTypes: [gohtml]
+uuid: 65e21840-02e5-11e4-9191-0800200c9a66
+
+patterns:
+- comment: <text></text> content tags
+  begin: (<text>)
+  beginCaptures:
+    '1': {name: entity.name.textblock.gohtml}
+  end: (</text>)
+  endCaptures:
+    '1': {name: entity.name.textblock.gohtml}
+  patterns:
+  - include: $self
+
+- comment: special html tags
+  begin: (\<head\>|\<html\>|\<body\>)
+  beginCaptures:
+    '1': {name: entity.name.special.opening.gohtml}
+  end:  ((\</head\>|\</html\>|\</body\>))
+  endCaptures:
+    '1': {name: entity.name.special.closing.gohtml}
+  patterns:
+  - include: $self
+
+- comment: handle gohtml inside html
+  begin: (\<[a-zA-Z0-9]+)
+  beginCaptures:
+    '1': {name: entity.name.begin.html.gohtml}
+  end: (\<)?(/)([a-zA-Z0-9\-]+)?(\>)
+  endCaptures:
+    '1': {name: entity.name.end.html.gohtml}
+    '2': {name: entity.name.end.slash.html.gohtml}
+    '3': {name: entity.name.end.html.gohtml}
+    '4': {name: entity.name.end.html.gohtml}
+  patterns:
+  - comment: attribute
+    match: ([a-zA-Z0-9\-]+\=)(?=[\'\"\@])
+    name: entity.name.attribute.gohtml
+
+  - comment: single quotes
+    name: text.basic.gohtml
+    begin: (?<=\=)(\')
+    beginCaptures:
+      '1': {name: string.quoted.single.gohtml}
+    end: (\')
+    endCaptures:
+      '1': {name: string.quoted.single.gohtml}
+    patterns:
+    - include: $self
+    - match: .
+      name: string.quoted.single.gohtml
+  - comment: double quotes
+    name: text.basic.gohtml
+    begin: (?<=\=)(\")
+    beginCaptures:
+      '1': {name: string.quoted.double.gohtml}
+    end: (\")
+    endCaptures:
+      '1': {name: string.quoted.double.gohtml}
+    patterns:
+    - include: $self
+    - match: .
+      name: string.quoted.double.gohtml
+  
+  - comment: innerHTML
+    begin: (\>)
+    beginCaptures:
+      '1': {name: entity.name.begin.closing.gohtml}
+    end: (\<[a-zA-Z0-9]*)
+    endCaptures:
+      '1': {name: entity.name.end.opeing.gohtml}
+    patterns:
+    - include: $self
+    
+  - comment: swallow quotes
+    match: \'|\"
+  - include: $self
+  - include: text.html.basic
+  - include: source.go
+
+- comment: transition brace/parenthesis
+  begin: (@)?(?:\s*)\{|\(
+  beginCaptures:
+    '1': {name: support.class.gohtml}
+  end: \}|\)
+  endCaptures:
+    '1': {name: support.class.gohtml}
+  patterns:
+  - include: $self
+  - include: source.go
+
+- comment: Multi-line Comments
+  name: comment.line.gohtml
+  begin: (@\*)
+  end: (\*@)
+
+- comment: Escaped transition character
+  name: string.regexp
+  match: '@@'
+
+- comment: transition alone, explicit or with properties
+  match: (@[a-zA-Z0-9]*\:?)(?:\.)?([a-zA-Z0-9]*)
+  captures:
+    '1': {name: support.class.gohtml}
+    '2': {name: entity.name.any.gohtml}
+- include: text.html.basic
