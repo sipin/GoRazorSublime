@@ -272,6 +272,8 @@
 					<string>support.class.gohtml</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>source.go</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -327,7 +329,7 @@
 		</dict>
 	</array>
 	<key>scopeName</key>
-	<string>source.go.html</string>
+	<string>text.html.gohtml</string>
 	<key>uuid</key>
 	<string>65e21840-02e5-11e4-9191-0800200c9a66</string>
 </dict>
