@@ -103,8 +103,9 @@ patterns:
   match: '@@'
 
 - comment: transition alone, explicit or with properties
-  match: (@[a-zA-Z0-9]*\:?)(?:\.)?([a-zA-Z0-9]*)
+  name: support.class.gohtml
+  match: (@)([a-zA-Z\_\.\-\s\d]*)
   captures:
     '1': {name: support.class.gohtml}
-    '2': {name: entity.name.any.gohtml}
+    '2': {name: source.go}
 - include: text.html.basic
