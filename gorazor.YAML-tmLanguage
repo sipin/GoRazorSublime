@@ -81,12 +81,14 @@ patterns:
   - include: text.html.basic
   - include: source.go
 
-- comment: transition brace/parenthesis
+- comment: transition brace
   name: source.go
-  begin: (@)?(?:\s*)\{|\(
+  begin: (@)?(?:\s*)(\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
-  end: \}|\)
+    '2': {name: support.class.gohtml}
+    '3': {name: support.class.gohtml}
+  end: (\})
   endCaptures:
     '1': {name: support.class.gohtml}
   patterns:
@@ -114,6 +116,20 @@ patterns:
   - include: $self
   - include: source.go
 
+- comment: \@module.func(....)
+  name: source.go
+  begin: (\@)([a-zA-Z\.]+)(\()
+  beginCaptures:
+    '1': {name: support.class.gohtml}
+    '2': {name: support.class.gohtml}
+    '3': {name: support.class.gohtml}
+  end: (\))
+  endCaptures:
+    '1': {name: support.class.gohtml}
+  patterns:
+  - include: $self
+  - include: source.go
+
 - comment: \@variable
   name: source.go
   begin: (\@)([a-zA-Z\.]+)
@@ -121,18 +137,6 @@ patterns:
     '1': {name: support.class.gohtml}
     '2': {name: support.class.gohtml}
   end: (\b)
-  patterns:
-  - include: source.go
-
-- comment: \@module.func(....)
-  name: source.go
-  begin: (\@)([a-zA-Z\.]+)\(
-  beginCaptures:
-    '1': {name: support.class.gohtml}
-    '2': {name: support.class.gohtml}
-  end: \)
-  endCaptures:
-    '1': {name: support.class.gohtml}
   patterns:
   - include: source.go
 

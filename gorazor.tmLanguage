@@ -251,7 +251,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(@)?(?:\s*)\{|\(</string>
+			<string>(@)?(?:\s*)(\{)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -259,11 +259,21 @@
 					<key>name</key>
 					<string>support.class.gohtml</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
 			</dict>
 			<key>comment</key>
-			<string>transition brace/parenthesis</string>
+			<string>transition brace</string>
 			<key>end</key>
-			<string>\}|\)</string>
+			<string>(\})</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -343,6 +353,53 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>(\@)([a-zA-Z\.]+)(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>\@module.func(....)</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>source.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(\@)([a-zA-Z\.]+)</string>
 			<key>beginCaptures</key>
 			<dict>
@@ -361,44 +418,6 @@
 			<string>\@variable</string>
 			<key>end</key>
 			<string>(\b)</string>
-			<key>name</key>
-			<string>source.go</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>source.go</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(\@)([a-zA-Z\.]+)\(</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>support.class.gohtml</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>support.class.gohtml</string>
-				</dict>
-			</dict>
-			<key>comment</key>
-			<string>\@module.func(....)</string>
-			<key>end</key>
-			<string>\)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>support.class.gohtml</string>
-				</dict>
-			</dict>
 			<key>name</key>
 			<string>source.go</string>
 			<key>patterns</key>
