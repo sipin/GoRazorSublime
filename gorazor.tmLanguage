@@ -305,7 +305,46 @@
 			<string>string.regexp</string>
 		</dict>
 		<dict>
-			<key>captures</key>
+			<key>begin</key>
+			<string>(@\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>\@(variable expression)</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>source.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\@)([a-zA-Z\.]+)</string>
+			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
@@ -315,15 +354,60 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>source.go</string>
+					<string>support.class.gohtml</string>
 				</dict>
 			</dict>
 			<key>comment</key>
-			<string>transition alone, explicit or with properties</string>
-			<key>match</key>
-			<string>(@)([a-zA-Z\_\.\-\s\d]*)</string>
+			<string>\@variable</string>
+			<key>end</key>
+			<string>(\b)</string>
 			<key>name</key>
-			<string>support.class.gohtml</string>
+			<string>source.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(\@)([a-zA-Z\.]+)\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>\@module.func(....)</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>source.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>include</key>

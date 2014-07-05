@@ -102,10 +102,38 @@ patterns:
   name: string.regexp
   match: '@@'
 
-- comment: transition alone, explicit or with properties
-  name: support.class.gohtml
-  match: (@)([a-zA-Z\_\.\-\s\d]*)
-  captures:
+- comment: \@(variable expression)
+  name: source.go
+  begin: (@\()
+  beginCaptures:
     '1': {name: support.class.gohtml}
-    '2': {name: source.go}
+  end: (\))
+  endCaptures:
+    '1': {name: support.class.gohtml}
+  patterns:
+  - include: $self
+  - include: source.go
+
+- comment: \@variable
+  name: source.go
+  begin: (\@)([a-zA-Z\.]+)
+  beginCaptures:
+    '1': {name: support.class.gohtml}
+    '2': {name: support.class.gohtml}
+  end: (\b)
+  patterns:
+  - include: source.go
+
+- comment: \@module.func(....)
+  name: source.go
+  begin: (\@)([a-zA-Z\.]+)\(
+  beginCaptures:
+    '1': {name: support.class.gohtml}
+    '2': {name: support.class.gohtml}
+  end: \)
+  endCaptures:
+    '1': {name: support.class.gohtml}
+  patterns:
+  - include: source.go
+
 - include: text.html.basic
