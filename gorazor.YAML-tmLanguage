@@ -86,23 +86,25 @@ patterns:
   begin: (@\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
-  end: (\})
+  end: ^[\t ]*\}$
   endCaptures:
-    '1': {name: support.class.gohtml}
+    '0': {name: support.class.gohtml}
   contentName: source.go
   patterns:
+  - include: "#block"
   - include: source.go
 
 - comment: transition brace
   name: source.go
-  begin: (@)([^\{\n]+)(\{)
+  begin: (@)?((if|for|switch|section) )([^\{\n]+)(\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
-    '2': {name: support.function.go}
-    '3': {name: support.class.gohtml}
-  end: (\})
+    '3': {name: keyword.control.go}
+    '4': {name: source.go}
+    '5': {name: support.class.gohtml}
+  end: \}
   endCaptures:
-    '1': {name: support.class.gohtml}
+    '0': {name: support.class.gohtml}
   patterns:
   - include: $self
   - include: source.go
@@ -160,6 +162,18 @@ patterns:
 - include: text.html.basic
 
 repository:
+  block:
+    comment: code block
+    begin: \{
+    beginCaptures:
+      '0': {name: source.go}
+    end: ^[\t ]*\}[\t ]*$
+    endCaptures:
+      '0': {name: source.go}
+    contentName: source.go
+    patterns:
+    - include: source.go
+    
   function:
     begin: ([a-zA-Z]+)(\()
     beginCaptures:

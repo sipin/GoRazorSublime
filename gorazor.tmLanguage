@@ -265,10 +265,10 @@
 			<key>contentName</key>
 			<string>source.go</string>
 			<key>end</key>
-			<string>(\})</string>
+			<string>^[\t ]*\}$</string>
 			<key>endCaptures</key>
 			<dict>
-				<key>1</key>
+				<key>0</key>
 				<dict>
 					<key>name</key>
 					<string>support.class.gohtml</string>
@@ -280,13 +280,17 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#block</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>source.go</string>
 				</dict>
 			</array>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(@)([^\{\n]+)(\{)</string>
+			<string>(@)?((if|for|switch|section) )([^\{\n]+)(\{)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -294,12 +298,17 @@
 					<key>name</key>
 					<string>support.class.gohtml</string>
 				</dict>
-				<key>2</key>
+				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>support.function.go</string>
+					<string>keyword.control.go</string>
 				</dict>
-				<key>3</key>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>source.go</string>
+				</dict>
+				<key>5</key>
 				<dict>
 					<key>name</key>
 					<string>support.class.gohtml</string>
@@ -308,10 +317,10 @@
 			<key>comment</key>
 			<string>transition brace</string>
 			<key>end</key>
-			<string>(\})</string>
+			<string>\}</string>
 			<key>endCaptures</key>
 			<dict>
-				<key>1</key>
+				<key>0</key>
 				<dict>
 					<key>name</key>
 					<string>support.class.gohtml</string>
@@ -457,6 +466,40 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>block</key>
+		<dict>
+			<key>begin</key>
+			<string>\{</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>source.go</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>code block</string>
+			<key>contentName</key>
+			<string>source.go</string>
+			<key>end</key>
+			<string>^[\t ]*\}[\t ]*$</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>source.go</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
+		</dict>
 		<key>function</key>
 		<dict>
 			<key>begin</key>
