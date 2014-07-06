@@ -130,6 +130,7 @@ patterns:
   - include: "#function"
 
 - comment: \@module.func(....)
+  name: module.func
   begin: (\@)([a-zA-Z\.]+)(\()
   beginCaptures:
     '1': {name: support.class.gohtml}
@@ -140,7 +141,8 @@ patterns:
     '1': {name: support.class.gohtml}
   patterns:
   - include: "#function"
-  - include: '#string.quoted.double.go'
+  - include: '#comma'
+  - include: '#string'
 
 - comment: \@variable
   name: source.go
@@ -183,10 +185,28 @@ repository:
     - include: "#function"
     - include: "#method"
     - include: '#variable'
+    - include: '#string'
+    - include: '#comma'
 
   variable:
     match: ([a-zA-Z]+)
     name: variable.other.go
+
+  comma:
+    match: ([, ]+)
+    name: punctuation.definition.comma.go
+
+  string:
+    name: text.basic.gohtml
+    begin: (\")
+    beginCaptures:
+      '1': {name: string.quoted.double.gohtml}
+    end: (\")
+    endCaptures:
+      '1': {name: string.quoted.double.gohtml}
+    patterns:
+    - match: .
+      name: string.quoted.double.gohtml
 
   method:
     begin: ([a-zA-Z]+).([a-zA-Z]+)(\()

@@ -424,6 +424,8 @@
 					<string>support.class.gohtml</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>module.func</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -432,7 +434,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#string.quoted.double.go</string>
+					<string>#comma</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
 				</dict>
 			</array>
 		</dict>
@@ -500,6 +506,13 @@
 				</dict>
 			</array>
 		</dict>
+		<key>comma</key>
+		<dict>
+			<key>match</key>
+			<string>([, ]+)</string>
+			<key>name</key>
+			<string>punctuation.definition.comma.go</string>
+		</dict>
 		<key>function</key>
 		<dict>
 			<key>begin</key>
@@ -527,6 +540,14 @@
 				<dict>
 					<key>include</key>
 					<string>#variable</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comma</string>
 				</dict>
 			</array>
 		</dict>
@@ -562,6 +583,40 @@
 				<dict>
 					<key>include</key>
 					<string>#function</string>
+				</dict>
+			</array>
+		</dict>
+		<key>string</key>
+		<dict>
+			<key>begin</key>
+			<string>(\")</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.gohtml</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\")</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.gohtml</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>text.basic.gohtml</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>.</string>
+					<key>name</key>
+					<string>string.quoted.double.gohtml</string>
 				</dict>
 			</array>
 		</dict>
