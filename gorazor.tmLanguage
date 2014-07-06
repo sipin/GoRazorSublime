@@ -251,7 +251,42 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(@)?(?:\s*)(\{)</string>
+			<string>(@\{)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>code block</string>
+			<key>contentName</key>
+			<string>source.go</string>
+			<key>end</key>
+			<string>(\})</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>source.go</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.go</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(@)([^\{\n]+)(\{)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -262,7 +297,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>support.class.gohtml</string>
+					<string>support.function.go</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -343,11 +378,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>$self</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>source.go</string>
+					<string>#function</string>
 				</dict>
 			</array>
 		</dict>
@@ -384,17 +415,15 @@
 					<string>support.class.gohtml</string>
 				</dict>
 			</dict>
-			<key>name</key>
-			<string>source.go</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>$self</string>
+					<string>#function</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>source.go</string>
+					<string>#string.quoted.double.go</string>
 				</dict>
 			</array>
 		</dict>
@@ -420,19 +449,87 @@
 			<string>(\b)</string>
 			<key>name</key>
 			<string>source.go</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>source.go</string>
-				</dict>
-			</array>
 		</dict>
 		<dict>
 			<key>include</key>
 			<string>text.html.basic</string>
 		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>function</key>
+		<dict>
+			<key>begin</key>
+			<string>([a-zA-Z]+)(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.go</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#function</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#method</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#variable</string>
+				</dict>
+			</array>
+		</dict>
+		<key>method</key>
+		<dict>
+			<key>begin</key>
+			<string>([a-zA-Z]+).([a-zA-Z]+)(\()</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.go</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\))</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.gohtml</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#function</string>
+				</dict>
+			</array>
+		</dict>
+		<key>variable</key>
+		<dict>
+			<key>match</key>
+			<string>([a-zA-Z]+)</string>
+			<key>name</key>
+			<string>variable.other.go</string>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>text.html.gohtml</string>
 	<key>uuid</key>

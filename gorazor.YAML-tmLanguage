@@ -81,12 +81,24 @@ patterns:
   - include: text.html.basic
   - include: source.go
 
-- comment: transition brace
+- comment: code block
   name: source.go
-  begin: (@)?(?:\s*)(\{)
+  begin: (@\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
-    '2': {name: support.class.gohtml}
+  end: (\})
+  endCaptures:
+    '1': {name: support.class.gohtml}
+  contentName: source.go
+  patterns:
+  - include: source.go
+
+- comment: transition brace
+  name: source.go
+  begin: (@)([^\{\n]+)(\{)
+  beginCaptures:
+    '1': {name: support.class.gohtml}
+    '2': {name: support.function.go}
     '3': {name: support.class.gohtml}
   end: (\})
   endCaptures:
@@ -113,11 +125,9 @@ patterns:
   endCaptures:
     '1': {name: support.class.gohtml}
   patterns:
-  - include: $self
-  - include: source.go
+  - include: "#function"
 
 - comment: \@module.func(....)
-  name: source.go
   begin: (\@)([a-zA-Z\.]+)(\()
   beginCaptures:
     '1': {name: support.class.gohtml}
@@ -127,8 +137,8 @@ patterns:
   endCaptures:
     '1': {name: support.class.gohtml}
   patterns:
-  - include: $self
-  - include: source.go
+  - include: "#function"
+  - include: '#string.quoted.double.go'
 
 - comment: \@variable
   name: source.go
@@ -137,7 +147,40 @@ patterns:
     '1': {name: support.class.gohtml}
     '2': {name: support.class.gohtml}
   end: (\b)
-  patterns:
-  - include: source.go
+
+# - comment: transition brace
+#   name: condition.go
+#   begin: (@)
+#   beginCaptures:
+#     '1': {name: support.class.gohtml}
+#   end: (\{)
+#   patterns:
+#   - include: source.go
 
 - include: text.html.basic
+
+repository:
+  function:
+    begin: ([a-zA-Z]+)(\()
+    beginCaptures:
+      '1': {name: support.function.go}
+    end: (\))
+    patterns:
+    - include: "#function"
+    - include: "#method"
+    - include: '#variable'
+
+  variable:
+    match: ([a-zA-Z]+)
+    name: variable.other.go
+
+  method:
+    begin: ([a-zA-Z]+).([a-zA-Z]+)(\()
+    beginCaptures:
+      '1': {name: support.class.gohtml}
+      '2': {name: support.function.go}
+    end: (\))
+    endCaptures:
+      '1': {name: support.class.gohtml}
+    patterns:
+    - include: "#function"
