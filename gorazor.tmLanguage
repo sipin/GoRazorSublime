@@ -265,7 +265,7 @@
 			<key>contentName</key>
 			<string>source.go</string>
 			<key>end</key>
-			<string>^[\t ]*\}$</string>
+			<string>^\}$</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
@@ -290,7 +290,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(@)?((if|for|switch|section) )([^\{\n]+)(\{)</string>
+			<string>(@)((if|for|switch|section)? )([^\{\n]+)(\{)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -327,7 +327,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>source.go</string>
+			<string>source.brace.go</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -481,25 +481,29 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>source.go</string>
+					<string>punctuation.definition.bracket.begin</string>
 				</dict>
 			</dict>
 			<key>comment</key>
 			<string>code block</string>
-			<key>contentName</key>
-			<string>source.go</string>
 			<key>end</key>
-			<string>^[\t ]*\}[\t ]*$</string>
+			<string>\}</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>source.go</string>
+					<string>punctuation.definition.bracket.end</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>source.block.go</string>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
 				<dict>
 					<key>include</key>
 					<string>source.go</string>

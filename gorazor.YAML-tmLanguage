@@ -86,7 +86,7 @@ patterns:
   begin: (@\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
-  end: ^[\t ]*\}$
+  end: ^\}$
   endCaptures:
     '0': {name: support.class.gohtml}
   contentName: source.go
@@ -95,8 +95,8 @@ patterns:
   - include: source.go
 
 - comment: transition brace
-  name: source.go
-  begin: (@)?((if|for|switch|section) )([^\{\n]+)(\{)
+  name: source.brace.go
+  begin: (@)((if|for|switch|section)? )([^\{\n]+)(\{)
   beginCaptures:
     '1': {name: support.class.gohtml}
     '3': {name: keyword.control.go}
@@ -168,12 +168,13 @@ repository:
     comment: code block
     begin: \{
     beginCaptures:
-      '0': {name: source.go}
-    end: ^[\t ]*\}[\t ]*$
+      '0': {name: punctuation.definition.bracket.begin}
+    end: \}
     endCaptures:
-      '0': {name: source.go}
-    contentName: source.go
+      '0': {name: punctuation.definition.bracket.end}
+    name: source.block.go
     patterns:
+    - include: $self
     - include: source.go
     
   function:
